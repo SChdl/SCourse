@@ -65,14 +65,19 @@ def arrange_quiz(quiz_list):
 
 def main(classes):
     class_list = []
+    color = 1
     for i in classes:
-        class_list.append(main1(i))
+        class_list.append(main1(i, color))
+        color += 1
+        if color >= 5:
+            color = 1
 
     lecture_list = []
     discussion_list = []
     lab_list = []
     quiz_list = []
     for c in class_list:
+        c.sort_based_on_professor()
         lecture_list.append(c.get_lecture_list())
         if len(c.get_discussion_list()) != 0:
             discussion_list.append(c.get_discussion_list())
@@ -80,16 +85,16 @@ def main(classes):
             lab_list.append(c.get_lab_list())
         if len(c.get_quiz_list()) != 0:
             quiz_list.append(c.get_quiz_list())
-
-    arrange_lecture(lecture_list)
     global lec_arr
+    lec_arr = []
+    arrange_lecture(lecture_list)
     for i in lec_arr:
         print("\nAll lecture arrangement as follow: ")
         for j in i:
             print('\t'+str(j))
-
-    arrange_discussion(discussion_list)
     global dic_arr
+    dic_arr = []
+    arrange_discussion(discussion_list)
     print("\nAll discussion and lab arrangement as follow: ")
     if len(dic_arr) != 0:
         for i in dic_arr[0]:
@@ -97,8 +102,9 @@ def main(classes):
     else:
         print("no lab or discussion")
 
-    arrange_quiz(quiz_list)
     global quiz_arr
+    quiz_arr = []
+    arrange_quiz(quiz_list)
     print("\nAll quiz arrangement as follow: ")
     if len(quiz_arr) != 0:
         for i in quiz_arr[0]:

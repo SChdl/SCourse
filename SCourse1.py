@@ -2,6 +2,7 @@ import os
 from bs4 import BeautifulSoup as bs
 import urllib.request
 import ssl
+import json
 
 from classType import *
 
@@ -17,7 +18,7 @@ def load_webpage(file_name, ctx):
     page = urllib.request.urlopen(file_name, context=ctx)
     return bs(page.read(), 'html.parser')
 
-def main1(input_):
+def main1(input_, color):
     course_name = input_
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
@@ -44,25 +45,42 @@ def main1(input_):
     class_num = course_name.split('-')[1]
     consecutive_flag = False
     consecutive = True
+    with open('ratings.json') as json_file:
+        ratings = json.load(json_file)
     for i in range(len(class_section)):
         if class_type[i].text == 'Lecture':
             if consecutive_flag:
                 consecutive = False
-            lecture_list.append(Lecture(class_section[i].text, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_instructor[i].text, class_location[i].text))
+            if ratings.get(class_instructor[i].text):
+                lecture_list.append(Lecture(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), Professor(class_instructor[i].text, ratings[class_instructor[i].text]['rating']), class_location[i].text, color))
+            else:
+                lecture_list.append(
+                    Lecture(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text),
+                            int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]),
+                            Professor(class_instructor[i].text, 0),
+                            class_location[i].text, color))
+
             consecutive_flag = True
         elif class_type[i].text == 'Discussion':
-            discussion_list.append(Discussion(class_section[i].text, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_instructor[i].text, class_location[i].text))
+            discussion_list.append(Discussion(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_location[i].text, color))
             consecutive_flag = False
         elif class_type[i].text == 'Lab':
-            discussion_list.append(Lab(class_section[i].text, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_instructor[i].text, class_location[i].text))
+            discussion_list.append(Lab(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_location[i].text, color))
             consecutive_flag = False
         elif class_type[i].text == 'Quiz':
-            quiz_list.append(Quiz(class_section[i].text, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_instructor[i].text, class_location[i].text))
+            quiz_list.append(Quiz(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_location[i].text, color))
             consecutive_flag = False
         else:
             if consecutive_flag:
                 consecutive = False
-            lecture_list.append(Lecture(class_section[i].text, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_instructor[i].text, class_location[i].text))
+            if ratings.get(class_instructor[i].text):
+                lecture_list.append(Lecture(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), Professor(class_instructor[i].text, ratings[class_instructor[i].text]['rating']), class_location[i].text, color))
+            else:
+                lecture_list.append(
+                    Lecture(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text),
+                            int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]),
+                            Professor(class_instructor[i].text, 0),
+                            class_location[i].text, color))
             consecutive_flag = True
     c = Class(lecture_list, discussion_list, lab_list, quiz_list, class_category, class_num, consecutive)
     print(c)

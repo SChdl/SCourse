@@ -66,10 +66,18 @@ class Period:
         return self.end_time
 
     def get_start_time_string(self):
-        return str(int(self.start_time/60)) + ':' + str(self.start_time%60)
+        if self.start_time % 60 == 0:
+            endString = '00'
+        else:
+            endString = str(self.start_time % 60)
+        return str(int(self.start_time/60)) + ':' + endString
 
     def get_end_time_string(self):
-        return str(int(self.end_time/60)) + ':' + str(self.end_time%60)
+        if self.end_time % 60 == 0:
+            endString = '00'
+        else:
+            endString = str(self.end_time % 60)
+        return str(int(self.end_time/60)) + ':' + endString
 
     def get_time_string(self):
         return self.timeString

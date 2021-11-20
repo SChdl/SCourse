@@ -32,6 +32,9 @@ class Class:
             print(l)
         return
 
+    def sort_based_on_professor(self):
+        self.lecture_list.sort(key=lambda x: x.professor.rating, reverse=True)
+
     def __str__(self):
         s = "Lecture(s):\n\t" + '\n\t'.join(str(x) for x in self.lecture_list)
         s += "\nDiscussion(s):\n\t" + '\n\t'.join(str(x) for x in self.discussion_list)
