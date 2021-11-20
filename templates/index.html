@@ -4,14 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.getElementsByTagName("html")[0].className += " js";</script>
-  <link rel="stylesheet" href="static/assets/css/style.css">
+  <link rel="stylesheet" href="/static/assets/css/style.css">
   <title>Schedule Template | CodyHouse</title>
 </head>
 <body>
   <header class="cd-main-header text-center flex flex-column flex-center">
-    <p class="margin-top-md margin-bottom-xl">👈 <a class="cd-article-link" href="https://codyhouse.co/gem/schedule-template">Article &amp; Download</a></p>
-
-    <h1 class="text-xl">Schedule Template</h1>
+    <h1 class="text-xl">SCourse</h1>
+    <form action="/arrange/" method="get">
+      <div class="form-group row" style="margin-bottom:0;">
+          <div class="col-md-6 col-xl-3">
+              <input type="text" class="form-control form-control-lg form-control-primary" placeholder="Class 1" name="class1">
+          </div>
+          <div class="col-md-6 col-xl-3">
+              <input type="text" class="form-control form-control-lg form-control-primary" placeholder="Class 2" name="class2">
+          </div>
+          <div class="col-md-6 col-xl-3">
+              <input type="text" class="form-control form-control-lg form-control-primary" placeholder="Class 3" name="class3">
+          </div>
+          <div class="col-md-6 col-xl-3">
+              <input type="text" class="form-control form-control-lg form-control-primary" placeholder="Class 4" name="class4">
+          </div>
+          <div class="col-md-6 col-xl-3">
+              <input type="text" class="form-control form-control-lg form-control-primary" placeholder="Class 5" name="class5">
+          </div>
+          <div class="col-md-6 col-xl-3 text-center">
+              <input type="submit" value="Arrange" class="btn btn-primary btn-round"></input>
+          </div>
+      </div>                     
+    </form>
   </header>
 
   <div class="cd-schedule cd-schedule--loading margin-top-lg margin-bottom-lg js-cd-schedule">
@@ -130,7 +150,7 @@
     <div class="cd-schedule__cover-layer"></div>
   </div> <!-- .cd-schedule -->
 
-  <script src="static/assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
-  <script src="static/assets/js/main.js"></script>
+  <script src="/static/assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
+  <script src="/static/assets/js/main.js"></script>
 </body>
 </html>

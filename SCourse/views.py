@@ -7,8 +7,22 @@ import requests
 from main import main
 
 def index(request):
-    schedule = main()
-    return render(request, "index.html", schedule) 
+    return render(request, "index.html", {})
+
+def arrange(request):
+    classes = []
+    if 'class1' in request.GET:
+        classes.append(request.GET['class1'])
+    if 'class2' in request.GET:
+        classes.append(request.GET['class2'])
+    if 'class3' in request.GET:
+        classes.append(request.GET['class3'])
+    if 'class4' in request.GET:
+        classes.append(request.GET['class4'])
+    if 'class5' in request.GET:
+        classes.append(request.GET['class5'])
+    schedule = main(classes)
+    return render(request, 'index.html', schedule)
 
 def aicoach(request):
     request.encoding='utf-8'
@@ -42,6 +56,5 @@ def aicoach(request):
     else:
         freeAcc = 0
     data = [float(score), float(shots), float(acc)/100, float(threeShots), float(threeAcc)/100, float(freeShots), float(freeAcc)/100]
-    c = check_sim(data)
-    c.update(main("aicoach", data))
+    c= {}
     return render(request, "aicoach.html", c) 

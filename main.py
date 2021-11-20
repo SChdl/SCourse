@@ -63,9 +63,9 @@ def arrange_quiz(quiz_list):
     global quiz_arr
     quiz_arr = []
 
-def main():
+def main(classes):
     class_list = []
-    for i in ['csci-356', 'ee-364', 'itp-353', 'amst-101']:
+    for i in classes:
         class_list.append(main1(i))
 
     lecture_list = []
