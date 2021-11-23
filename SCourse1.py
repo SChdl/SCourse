@@ -26,7 +26,7 @@ def main1(input_, color):
     if os.path.exists('sites/' + course_name + '.html'):
         print("this course is already loaded")
     else:
-        store_webpage('https://classes.usc.edu/term-20221/course/' + course_name, ctx, 'sites/' + course_name + '.html')
+        store_webpage('https://classes.usc.edu/term-20213/course/' + course_name, ctx, 'sites/' + course_name + '.html')
 
     class_file_name = 'file://' + os.getcwd() + '/sites/' + course_name + '.html'
     soup_class = load_webpage(class_file_name, ctx)
@@ -65,7 +65,13 @@ def main1(input_, color):
             discussion_list.append(Discussion(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_location[i].text, color))
             consecutive_flag = False
         elif class_type[i].text == 'Lab':
-            discussion_list.append(Lab(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_location[i].text, color))
+            if class_registered[i].text == 'Canceled':
+                discussion_list.append(
+                    Lab(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text),
+                        0, 0,
+                        class_location[i].text, color))
+            else:
+                discussion_list.append(Lab(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_location[i].text, color))
             consecutive_flag = False
         elif class_type[i].text == 'Quiz':
             quiz_list.append(Quiz(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_location[i].text, color))
@@ -83,7 +89,7 @@ def main1(input_, color):
                             class_location[i].text, color))
             consecutive_flag = True
     c = Class(lecture_list, discussion_list, lab_list, quiz_list, class_category, class_num, consecutive)
-    print(c)
+    # print(c)
     return c
 
 if __name__ == '__main__':

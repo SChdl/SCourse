@@ -11,6 +11,8 @@ def index(request):
 
 def arrange(request):
     classes = []
+    prof = False
+    t = False
     if 'class1' in request.POST:
         classes.append(request.POST['class1'])
     if 'class2' in request.POST:
@@ -21,5 +23,12 @@ def arrange(request):
         classes.append(request.POST['class4'])
     if 'class5' in request.POST:
         classes.append(request.POST['class5'])
-    schedule = main(classes)
+    if 'professor' in request.POST:
+        prof = True
+        print('prof in it')
+    if 'time' in request.POST:
+        print('time in it')
+        t = True
+    schedule = main(classes, professor=prof, time=t)
     return render(request, 'index.html', schedule)
+

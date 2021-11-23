@@ -35,6 +35,17 @@ class Class:
     def sort_based_on_professor(self):
         self.lecture_list.sort(key=lambda x: x.professor.rating, reverse=True)
 
+    def sort_based_on_time(self):
+        self.lecture_list.sort(key=lambda x: x.period.start_time, reverse=True)
+        for i in self.lecture_list:
+            print(i)
+        self.discussion_list.sort(key=lambda x: x.period.start_time, reverse=True)
+        for i in self.discussion_list:
+            print(i)
+        self.lab_list.sort(key=lambda x: x.period.start_time, reverse=True)
+        for i in self.lab_list:
+            print(i)
+
     def __str__(self):
         s = "Lecture(s):\n\t" + '\n\t'.join(str(x) for x in self.lecture_list)
         s += "\nDiscussion(s):\n\t" + '\n\t'.join(str(x) for x in self.discussion_list)

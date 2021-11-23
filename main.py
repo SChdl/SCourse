@@ -63,7 +63,7 @@ def arrange_quiz(quiz_list):
     global quiz_arr
     quiz_arr = []
 
-def main(classes):
+def main(classes, professor, time):
     class_list = []
     color = 1
     for i in classes:
@@ -77,7 +77,11 @@ def main(classes):
     lab_list = []
     quiz_list = []
     for c in class_list:
-        c.sort_based_on_professor()
+        if time:
+            c.sort_based_on_time()
+        if professor:
+            c.sort_based_on_professor()
+
         lecture_list.append(c.get_lecture_list())
         if len(c.get_discussion_list()) != 0:
             discussion_list.append(c.get_discussion_list())
@@ -114,7 +118,7 @@ def main(classes):
 
     return_dic = {"Monday": [], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []}
     for lec in lec_arr[0] + dic_arr[0]:
-        print(lec)
+        # print(lec)
         for day in lec.get_period().get_days_list():
             if day == 1:
                 return_dic['Monday'].append(lec.get_dic_format())
@@ -126,7 +130,7 @@ def main(classes):
                 return_dic['Thursday'].append(lec.get_dic_format())
             elif day == 5:
                 return_dic['Friday'].append(lec.get_dic_format())
-    print(return_dic)
+    # print(return_dic)
     return return_dic
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
