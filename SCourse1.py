@@ -26,7 +26,7 @@ def main1(input_, color):
     if os.path.exists('sites/' + course_name + '.html'):
         print("this course is already loaded")
     else:
-        store_webpage('https://classes.usc.edu/term-20213/course/' + course_name, ctx, 'sites/' + course_name + '.html')
+        store_webpage('https://classes.usc.edu/term-20221/course/' + course_name, ctx, 'sites/' + course_name + '.html')
 
     class_file_name = 'file://' + os.getcwd() + '/sites/' + course_name + '.html'
     soup_class = load_webpage(class_file_name, ctx)
@@ -89,7 +89,7 @@ def main1(input_, color):
                             class_location[i].text, color))
             consecutive_flag = True
     c = Class(lecture_list, discussion_list, lab_list, quiz_list, class_category, class_num, consecutive)
-    # print(c)
+    print(c)
     return c
 
 if __name__ == '__main__':

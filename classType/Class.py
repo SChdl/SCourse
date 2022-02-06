@@ -52,4 +52,3 @@ class Class:
         s += "\nLab(s):\n\t" + '\n\t'.join(str(x) for x in self.lab_list)
         s += "\nQuiz:\n\t" + '\n\t'.join(str(x) for x in self.quiz_list)
         return s
-

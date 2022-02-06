@@ -9,11 +9,7 @@ def check_conflict(section_list):
             p_i = section_list[i].get_period()
             p_j = section_list[j].get_period()
             if p_i.if_collision(p_j):
-                return (i, j)
-    # section_list.sort(key=lambda x: x.period.start_time)
-    # for i in range(len(section_list) - 1):
-    #     if section_list[i].get_period().if_collision(section_list[i + 1].get_period()):
-    #         return (i, i+1)
+                return i, j
     return []
 
 def arrange_lecture(lecture_list):
@@ -27,10 +23,6 @@ def arrange_lecture(lecture_list):
     conflicted_classes = check_conflict(temp_arr)
     if len(conflicted_classes) == 0:
         lec_arr.append(temp_arr)
-        # for i in range(len(lecture_list)):
-        #     removed = lecture_list[i].pop(0)
-        #     arrange_lecture(lecture_list)
-        #     lecture_list[i].insert(0, removed)
     else:
         # this can definitely be optimized
         for i in conflicted_classes:
@@ -117,7 +109,15 @@ def main(classes, professor, time):
         print("no quiz")
 
     return_dic = {"Monday": [], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []}
-    for lec in lec_arr[0] + dic_arr[0]:
+    lecs_arr = []
+    if len(lec_arr) == 0:
+        if len(dic_arr) == 0:
+            lec_arr = []
+        else:
+            lecs_arr = dic_arr[0]
+    else:
+        lecs_arr = lec_arr[0] + dic_arr[0]
+    for lec in lecs_arr:
         # print(lec)
         for day in lec.get_period().get_days_list():
             if day == 1:
