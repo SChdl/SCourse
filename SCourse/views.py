@@ -13,15 +13,15 @@ def arrange(request):
     classes = []
     prof = False
     t = False
-    if 'class1' in request.POST:
+    if 'class1' in request.POST and request.POST['class1'] is not '':
         classes.append(request.POST['class1'])
-    if 'class2' in request.POST:
+    if 'class2' in request.POST and request.POST['class2'] is not '':
         classes.append(request.POST['class2'])
-    if 'class3' in request.POST:
+    if 'class3' in request.POST and request.POST['class3'] is not '':
         classes.append(request.POST['class3'])
-    if 'class4' in request.POST:
+    if 'class4' in request.POST and request.POST['class4'] is not '':
         classes.append(request.POST['class4'])
-    if 'class5' in request.POST:
+    if 'class5' in request.POST and request.POST['class5'] is not '':
         classes.append(request.POST['class5'])
     if 'professor' in request.POST:
         prof = True

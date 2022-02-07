@@ -41,6 +41,8 @@ def main1(input_, color):
     discussion_list = []
     lab_list = []
     quiz_list = []
+    if course_name == "":
+        return
     class_category = course_name.split('-')[0]
     class_num = course_name.split('-')[1]
     consecutive_flag = False
