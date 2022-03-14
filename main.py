@@ -1,4 +1,4 @@
-from SCourse1 import main1
+from getCourseInfo import main1
 
 lec_arr = []
 dic_arr = []
@@ -53,7 +53,13 @@ def arrange_discussion(discussion_list):
 
 def arrange_quiz(quiz_list):
     global quiz_arr
-    quiz_arr = []
+    temp_arr = []
+    for i in quiz_list:
+        if len(i) == 0:
+            return
+        temp_arr.append(i[0])
+
+
 
 def main(classes, professor, time):
     class_list = []
@@ -109,7 +115,7 @@ def main(classes, professor, time):
         print("no quiz")
 
     return_dic = {"Monday": [], "Tuesday": [], "Wednesday": [], "Thursday": [], "Friday": []}
-    lecs_arr = []
+    lecs_arr = [] # for all lectures and all discussions
     if len(lec_arr) == 0:
         if len(dic_arr) == 0:
             lec_arr = []
@@ -118,7 +124,7 @@ def main(classes, professor, time):
     else:
         lecs_arr = lec_arr[0] + dic_arr[0]
     for lec in lecs_arr:
-        # print(lec)
+        print(lec)
         for day in lec.get_period().get_days_list():
             if day == 1:
                 return_dic['Monday'].append(lec.get_dic_format())
@@ -130,7 +136,14 @@ def main(classes, professor, time):
                 return_dic['Thursday'].append(lec.get_dic_format())
             elif day == 5:
                 return_dic['Friday'].append(lec.get_dic_format())
-    # print(return_dic)
+    blank = True
+    for day in return_dic:
+        if return_dic[day]:
+            blank = False
+    return_dic['blank'] = blank
+    return_dic['arranged'] = True
+
+    print(return_dic)
     return return_dic
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

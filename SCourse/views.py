@@ -30,5 +30,7 @@ def arrange(request):
         print('time in it')
         t = True
     schedule = main(classes, professor=prof, time=t)
+
+
     return render(request, 'index.html', schedule)
 

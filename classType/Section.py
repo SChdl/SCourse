@@ -1,7 +1,7 @@
 class Section:
     def __init__(self, section_param, class_name, period_param, registered_param, capacity_param, location_param, color_param):
         self.section = section_param
-        self.name = class_name
+        self.class_name = class_name
         self.period = period_param
         self.registered = registered_param
         self.capacity = capacity_param
@@ -24,9 +24,9 @@ class Section:
         return self.location
 
     def get_dic_format(self):
-        dic = {"name": self.name, "section": self.section, "startTime": self.period.get_start_time_string(), "endTime": self.period.get_end_time_string(), "location": self.location, "color": self.color}
+        dic = {"name": self.class_name, "section": self.section, "startTime": self.period.get_start_time_string(), "endTime": self.period.get_end_time_string(), "location": self.location, "color": self.color}
         return dic
 
     def __str__(self):
-        s = ' '.join([self.section, str(self.period), str(self.registered), str(self.capacity), self.location])
+        s = ' '.join([self.class_name, self.section, str(self.period), str(self.registered), str(self.capacity), self.location])
         return s
