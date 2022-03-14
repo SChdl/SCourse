@@ -12,7 +12,7 @@ def index(request):
     return render(request, "index.html", {})
 
 def correct_format(input):
-    regex = re.match(r"^[a-zA-z]{4}\-\d{3}[a-z]?$", input)
+    regex = re.match(r"^[a-zA-z]{2,4}\-\d{3}[a-z]?$", input)
     if regex:
         return True
     else:
