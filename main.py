@@ -59,6 +59,9 @@ def arrange_quiz(quiz_list):
             return
         temp_arr.append(i[0])
 
+def cmp_key(a):
+    return a.class_name
+
 
 
 def main(classes, professor, time):
@@ -67,8 +70,7 @@ def main(classes, professor, time):
     for i in classes:
         class_list.append(main1(i, color))
         color += 1
-        if color >= 5:
-            color = 1
+
 
     lecture_list = []
     discussion_list = []
@@ -124,7 +126,6 @@ def main(classes, professor, time):
     else:
         lecs_arr = lec_arr[0] + dic_arr[0]
     for lec in lecs_arr:
-        print(lec)
         for day in lec.get_period().get_days_list():
             if day == 1:
                 return_dic['Monday'].append(lec.get_dic_format())
@@ -142,6 +143,8 @@ def main(classes, professor, time):
             blank = False
     return_dic['blank'] = blank
     return_dic['arranged'] = True
+    lecs_arr.sort(key=cmp_key)
+    return_dic['sections'] = lecs_arr
 
     print(return_dic)
     return return_dic
