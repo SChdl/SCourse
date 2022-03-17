@@ -50,7 +50,7 @@ def main1(input_, color):
     with open('ratings.json') as json_file:
         ratings = json.load(json_file)
     for i in range(len(class_section)):
-        if class_type[i].text == 'Lecture':
+        if 'Lecture' in class_type[i].text:
             if consecutive_flag:
                 consecutive = False
             if ratings.get(class_instructor[i].text):
@@ -82,6 +82,7 @@ def main1(input_, color):
             lecture_list[-1].add_period(Period(class_time[i].text, class_days[i].text))
             print(lecture_list[-1])
         else:
+            print(class_type[i].text)
             if consecutive_flag:
                 consecutive = False
             if ratings.get(class_instructor[i].text):

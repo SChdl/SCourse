@@ -19,9 +19,6 @@ def correct_format(input):
         return False
 
 def arrange(request):
-    input = "CSCI-310"
-    print(input)
-    print(correct_format(input))
 
     classes = []
     prof = False
