@@ -78,6 +78,9 @@ def main1(input_, color):
         elif class_type[i].text == 'Quiz':
             quiz_list.append(Quiz(class_section[i].text, input_, Period(class_time[i].text, class_days[i].text), int(class_registered[i].text.split()[0]), int(class_registered[i].text.split()[2]), class_location[i].text, color))
             consecutive_flag = False
+        elif class_type[i].text == '':
+            lecture_list[-1].add_period(Period(class_time[i].text, class_days[i].text))
+            print(lecture_list[-1])
         else:
             if consecutive_flag:
                 consecutive = False

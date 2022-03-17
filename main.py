@@ -138,17 +138,29 @@ def main(classes, professor, time):
     # else:
     #     all_arr = lec_arr[0] + dic_arr[0]
     for c in all_arr:
-        for day in c.get_period().get_days_list():
-            if day == 1:
-                return_dic['Monday'].append(c.get_dic_format())
-            elif day == 2:
-                return_dic['Tuesday'].append(c.get_dic_format())
-            elif day == 3:
-                return_dic['Wednesday'].append(c.get_dic_format())
-            elif day == 4:
-                return_dic['Thursday'].append(c.get_dic_format())
-            elif day == 5:
-                return_dic['Friday'].append(c.get_dic_format())
+        for d, t in c.get_period().get_all_periods().items():
+            if d == 1:
+                return_dic['Monday'].append(c.get_dic_format(1))
+            elif d == 2:
+                return_dic['Tuesday'].append(c.get_dic_format(2))
+            elif d == 3:
+                return_dic['Wednesday'].append(c.get_dic_format(3))
+            elif d == 4:
+                return_dic['Thursday'].append(c.get_dic_format(4))
+            elif d == 5:
+                return_dic['Friday'].append(c.get_dic_format(5))
+    # for c in all_arr:
+    #     for day in c.get_period().get_days_list():
+    #         if day == 1:
+    #             return_dic['Monday'].append(c.get_dic_format())
+    #         elif day == 2:
+    #             return_dic['Tuesday'].append(c.get_dic_format())
+    #         elif day == 3:
+    #             return_dic['Wednesday'].append(c.get_dic_format())
+    #         elif day == 4:
+    #             return_dic['Thursday'].append(c.get_dic_format())
+    #         elif day == 5:
+    #             return_dic['Friday'].append(c.get_dic_format())
     blank = True
     for day in return_dic:
         if return_dic[day]:

@@ -52,6 +52,11 @@ def arrange(request):
             classes.append(request.POST['class5'])
         else:
             invalid_format = True
+    if 'class5' in request.POST and request.POST['class6'] is not '':
+        if correct_format(request.POST['class6']):
+            classes.append(request.POST['class6'])
+        else:
+            invalid_format = True
     if 'professor' in request.POST:
         prof = True
         print('prof in it')
