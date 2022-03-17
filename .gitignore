@@ -1,5 +1,4 @@
 # Default ignored files
-sites/*
 .DS_Store
-.idea
-__pychache__
+.idea/
+__pychache__/
