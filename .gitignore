@@ -2,3 +2,4 @@
 sites/*
 .DS_Store
 .idea
+__pychache__
