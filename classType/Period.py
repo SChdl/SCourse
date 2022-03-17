@@ -10,7 +10,7 @@ class Period:
         # 11:00 - 1:20pm
         # 9:00 - 12:20pm
         # 5:00 - 8:50pm
-        self.all_periods = []
+        self.all_periods = {}
         self.days_list = []
         self.timeString = time
         self.dayString = days
@@ -53,31 +53,34 @@ class Period:
                 self.days_list.append(5)
 
             for d in self.days_list:
-                self.all_periods.append((int(d), self.start_time, self.end_time))
+                self.all_periods[d] = (self.start_time, self.end_time)
 
     def __str__(self):
         s = self.timeString + ' days: ' + self.dayString
         return s
 
-    def get_start_time(self):
-        return self.start_time
+    def add(self, period):
+        self.all_periods.update(period.get_all_periods())
 
-    def get_end_time(self):
-        return self.end_time
+    # def get_start_time(self):
+    #     return self.start_time
+    #
+    # def get_end_time(self):
+    #     return self.end_time
 
-    def get_start_time_string(self):
-        if self.start_time % 60 == 0:
+    def get_start_time_string(self, day):
+        if self.all_periods[day][0] % 60 == 0:
             endString = '00'
         else:
-            endString = str(self.start_time % 60)
-        return str(int(self.start_time/60)) + ':' + endString
+            endString = str(self.all_periods[day][0] % 60)
+        return str(int(self.all_periods[day][0]/60)) + ':' + endString
 
-    def get_end_time_string(self):
-        if self.end_time % 60 == 0:
+    def get_end_time_string(self, day):
+        if self.all_periods[day][1] % 60 == 0:
             endString = '00'
         else:
-            endString = str(self.end_time % 60)
-        return str(int(self.end_time/60)) + ':' + endString
+            endString = str(self.all_periods[day][1] % 60)
+        return str(int(self.all_periods[day][1]/60)) + ':' + endString
 
     def get_time_string(self):
         return self.timeString
@@ -88,21 +91,28 @@ class Period:
     def get_all_periods(self):
         return self.all_periods
 
-    def if_same_day(self, days_a, days_b):
-        for a in days_a:
-            for b in days_b:
-                if a == b:
-                    return True
-        return False
+    # def if_same_day(self, days_a, days_b):
+    #     for a in days_a:
+    #         for b in days_b:
+    #             if a == b:
+    #                 return True
+    #     return False
+
+    # def if_collision(self, period):
+    #     a_start = self.get_start_time()
+    #     a_end = self.get_end_time()
+    #     a_days = self.get_days_list()
+    #     b_start = period.get_start_time()
+    #     b_end = period.get_end_time()
+    #     b_days = period.get_days_list()
+    #     if b_start <= a_start <= b_end or b_start <= a_end <= b_end:
+    #         if self.if_same_day(a_days, b_days):
+    #             return True
+    #     return False
 
     def if_collision(self, period):
-        a_start = self.get_start_time()
-        a_end = self.get_end_time()
-        a_days = self.get_days_list()
-        b_start = period.get_start_time()
-        b_end = period.get_end_time()
-        b_days = period.get_days_list()
-        if b_start <= a_start <= b_end or b_start <= a_end <= b_end:
-            if self.if_same_day(a_days, b_days):
-                return True
+        for d1, t1 in self.all_periods.items():
+            for d2, t2 in period.get_all_periods().items():
+                if d1 == d2 and (t1[0] <= t2[0] <= t1[1] or t1[0] <= t2[1] <= t1[1]):
+                    return True
         return False

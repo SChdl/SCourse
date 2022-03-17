@@ -6,7 +6,16 @@ class Class:
         self.quiz_list = quiz_list
         self.class_type = class_type
         self.class_num = class_num
-        self.consecutive = consecutive
+        # self.consecutive = consecutive
+        # self.units = {}
+        # ratio = int(len(discussion_list) / len(lecture_list))
+        # if consecutive:
+        #     for l in lecture_list:
+        #         self.units[l.get_section()] = self.discussion_list[:ratio]
+        #         self.discussion_list = self.discussion_list[:ratio]
+        # else:
+        #     for l in lecture_list:
+        #         self.units[l.get_section()] = self.discussion_list
 
         # when parsing info from the web page, we can analyze whether the lectures are consecutive or not
         # if not consecutive, input a dict_of_lectures
@@ -20,6 +29,9 @@ class Class:
 
     def get_discussion_list(self):
         return self.discussion_list
+
+    # def get_units(self, section):
+    #     return self.units[section]
 
     def get_lab_list(self):
         return self.lab_list

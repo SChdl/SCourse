@@ -11,3 +11,5 @@ class Lecture(Section):
     def get_professor(self):
         return self.professor
 
+    def add_period(self, period):
+        self.period.add(period)

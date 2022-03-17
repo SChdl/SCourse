@@ -23,8 +23,8 @@ class Section:
     def get_location(self):
         return self.location
 
-    def get_dic_format(self):
-        dic = {"name": self.class_name, "section": self.section, "startTime": self.period.get_start_time_string(), "endTime": self.period.get_end_time_string(), "location": self.location, "color": self.color}
+    def get_dic_format(self, day):
+        dic = {"name": self.class_name, "section": self.section, "startTime": self.period.get_start_time_string(day), "endTime": self.period.get_end_time_string(day), "location": self.location, "color": self.color}
         return dic
 
     def __str__(self):
