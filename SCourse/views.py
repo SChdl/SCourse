@@ -56,9 +56,7 @@ def arrange(request):
             invalid_format = True
     if 'professor' in request.POST:
         prof = True
-        print('prof in it')
     if 'time' in request.POST:
-        print('time in it')
         t = True
     schedule = main(classes, professor=prof, time=t)
     schedule['invalid'] = invalid_format
@@ -68,5 +66,7 @@ def arrange(request):
     schedule['classFour'] = request.POST['class4']
     schedule['classFive'] = request.POST['class5']
     schedule['classSix'] = request.POST['class6']
+    schedule['professor'] = 'checked' if prof else ''
+    schedule['time'] = 'checked' if t else ''
     return render(request, 'index.html', schedule)
 
