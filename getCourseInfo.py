@@ -26,7 +26,7 @@ def main1(input_, color):
     if os.path.exists('sites/' + course_name + '.html'):
         print("this course is already loaded")
     else:
-        store_webpage('https://classes.usc.edu/term-20223/course/' + course_name, ctx, 'sites/' + course_name + '.html')
+        store_webpage('https://classes.usc.edu/term-20231/course/' + course_name, ctx, 'sites/' + course_name + '.html')
 
     class_file_name = 'file://' + os.getcwd() + '/sites/' + course_name + '.html'
     soup_class = load_webpage(class_file_name, ctx)
