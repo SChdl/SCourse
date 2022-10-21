@@ -10,6 +10,9 @@ def store_webpage(url, ctx, fn):
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     page = urllib.request.urlopen(req, context=ctx)
     soup = bs(page.read(), 'html.parser')
+    if not os.path.exists(fn):
+        f = open(fn, "x")
+        f.close()
     f = open(fn, 'w')
     print(soup, file=f)
     f.close()
